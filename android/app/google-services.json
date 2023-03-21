@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "1095065135490",
+    "project_id": "ventas-7ab4a",
+    "storage_bucket": "ventas-7ab4a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095065135490:android:511c8d85a97ec65154c79b",
+        "android_client_info": {
+          "package_name": "com.example.compras"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1095065135490-g2quhkrg814l601745ouq1c7u2463ghk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLpvVyFwyrr6JHiFl9R0U9JWabIHoCsFQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1095065135490-g2quhkrg814l601745ouq1c7u2463ghk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1095065135490-drhnkvhtde7l0r15htt74cfdktatjani.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ventas"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095065135490:android:de5b5e967cf1dc3854c79b",
+        "android_client_info": {
+          "package_name": "com.example.ventas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1095065135490-g2quhkrg814l601745ouq1c7u2463ghk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLpvVyFwyrr6JHiFl9R0U9JWabIHoCsFQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1095065135490-g2quhkrg814l601745ouq1c7u2463ghk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1095065135490-drhnkvhtde7l0r15htt74cfdktatjani.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ventas"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
