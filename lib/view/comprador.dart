@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Compradores extends StatefulWidget {
+
+
   @override
   _CompradoresState createState() => _CompradoresState();
 }
@@ -10,6 +12,10 @@ class _CompradoresState extends State<Compradores> {
   CollectionReference items = FirebaseFirestore.instance.collection('items');
 
   List<CompradorItem> itemList = [];
+
+  String nombreUsuario = '';
+  String direccion = 'Universidad';
+
 
   @override
   void initState() {
@@ -24,27 +30,79 @@ class _CompradoresState extends State<Compradores> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Artículos disponibles'),
       ),
-      body: itemList.isEmpty
-          ? Center(
-        child: CircularProgressIndicator(),
-      )
-          : ListView.builder(
-        itemCount: itemList.length,
-        itemBuilder: (context, index) {
-          return CompradorItemCard(compradorItem: itemList[index]);
-        },
-      ),
+      body: Column(
+        children: [
+          Form(
+            child: Column(
+              children: [
+                Padding(padding: EdgeInsets.only(top: 10, left: 10,right: 10),
+                  child: TextField(
+                  decoration: InputDecoration(
+                  labelText: 'Nombre',
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)
+                   ),
+                 ),
 
+                  onChanged: (value) {
+                    setState(() {
+                      nombreUsuario = value;
+                    });
+                  },
+                  ),
+                ),
+
+                  Padding(padding: EdgeInsets.only(top: 10, left: 10,right: 10),
+                  child: TextField(
+                  decoration: InputDecoration(
+                  labelText: 'Direccion',
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)
+                  ),
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      direccion = value;
+                      });
+                    },
+                    ),
+                  ),
+
+              ],
+            ),
+          ),
+          itemList.isEmpty
+              ? Center(
+            child: CircularProgressIndicator(),
+          )
+              : Expanded(
+            child: ListView.builder(
+              itemCount: itemList.length,
+              itemBuilder: (context, index) {
+                return CompradorItemCard(compradorItem: itemList[index]);
+              },
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 20, left: 10, right: 10),
+            child: ElevatedButton(
+              onPressed: () {
+
+              },
+              child: Text('Hacer Pedido'),
+            ),
+          ),
+        ],
+      ),
     );
   }
-}
 
+}
 class CompradorItem {
   final String id;
   final String name;
