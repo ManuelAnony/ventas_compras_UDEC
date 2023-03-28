@@ -2,12 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Compradores extends StatefulWidget {
-
-
   @override
   _CompradoresState createState() => _CompradoresState();
 }
-
 class _CompradoresState extends State<Compradores> {
   CollectionReference items = FirebaseFirestore.instance.collection('items');
 
@@ -15,22 +12,17 @@ class _CompradoresState extends State<Compradores> {
 
   String nombreUsuario = '';
   String direccion = 'Universidad';
-
-
   @override
   void initState() {
     super.initState();
     getItems();
   }
-
   void getItems() async {
     QuerySnapshot querySnapshot = await items.get();
     setState(() {
       itemList = querySnapshot.docs.map((doc) => CompradorItem(doc)).toList();
     });
   }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,8 +64,7 @@ class _CompradoresState extends State<Compradores> {
                     },
                     ),
                   ),
-
-              ],
+               ],
             ),
           ),
           itemList.isEmpty
@@ -165,3 +156,4 @@ class _CompradorItemCardState extends State<CompradorItemCard> {
     );
   }
 }
+

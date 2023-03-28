@@ -180,6 +180,16 @@ class _InventarioState extends State<Inventario> {
             },
           ),
           TextButton(
+            child: Text('Eliminar'),
+            style: TextButton.styleFrom(
+              //primary: Colors.red,
+            ),
+            onPressed: () async {
+              await items.doc(item.id).delete();
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
             child: Text('Guardar'),
             onPressed: () async {
               String name = _nameController.text;
@@ -222,7 +232,10 @@ class ItemCard extends StatelessWidget {
       child: ListTile(
         title: Text(item.name),
         subtitle: Text('Cantidad: ${item.quantity}\nPrecio: ${item.price}'),
+
       ),
-    );
+      );
+
   }
+
 }

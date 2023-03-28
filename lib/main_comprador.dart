@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'My App',
       home: Compradores() // pantalla de inicio nueva
+      //home: ProductPage()
     );
   }
 }
