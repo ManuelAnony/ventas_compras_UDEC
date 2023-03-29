@@ -6,6 +6,7 @@ class Compradores extends StatefulWidget {
   _CompradoresState createState() => _CompradoresState();
 }
 class _CompradoresState extends State<Compradores> {
+
   CollectionReference items = FirebaseFirestore.instance.collection('items');
 
   List<CompradorItem> itemList = [];
@@ -26,20 +27,48 @@ class _CompradoresState extends State<Compradores> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
+
         title: Text('Artículos disponibles'),
+        backgroundColor: Color(0xFF007B3E),
       ),
       body: Column(
         children: [
           Form(
             child: Column(
               children: [
-                Padding(padding: EdgeInsets.only(top: 10, left: 10,right: 10),
+                Padding(padding: EdgeInsets.only(top: 30, left: 10,right: 10,bottom: 15),
                   child: TextField(
                   decoration: InputDecoration(
                   labelText: 'Nombre',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)
-                   ),
+                    labelStyle: TextStyle( color: Colors.grey[600],fontSize: 25.0,),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(
+                        color: Color(0xFF349665),
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(
+                          color: Color(0xFF349665),
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(
+                        color: Color(0xFF349665),
+                      ),
+                    ),
+                    hintText: 'Escribe aquí',
+                    hintStyle: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                    style: TextStyle(
+                      color: Colors.black,
+
                  ),
 
                   onChanged: (value) {
@@ -50,13 +79,38 @@ class _CompradoresState extends State<Compradores> {
                   ),
                 ),
 
-                  Padding(padding: EdgeInsets.only(top: 10, left: 10,right: 10),
+                  Padding(padding: EdgeInsets.only(top: 10, left: 10,right: 10, bottom: 30),
                   child: TextField(
                   decoration: InputDecoration(
                   labelText: 'Direccion',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)
+                    labelStyle: TextStyle( color: Colors.grey[600],fontSize: 25.0,),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(
+                        color: Color(0xFF349665),
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(
+                        color: Color(0xFF349665),
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(
+                        color: Color(0xFF349665),
+                      ),
+                    ),
+                    hintText: 'Escribe aquí',
+                    hintStyle: TextStyle(
+                      color: Colors.black,
+                    ),
                   ),
-                  ),
+                    style: TextStyle(
+                      color: Colors.black,
+
+                    ),
                   onChanged: (value) {
                     setState(() {
                       direccion = value;
@@ -80,16 +134,33 @@ class _CompradoresState extends State<Compradores> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 20, left: 10, right: 10),
+            padding: EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 15),
             child: ElevatedButton(
-              onPressed: () {
+              onPressed: () {        },
+              child: Text(
+                'Hacer Pedido',
+                style: TextStyle(
+                  color: Colors.grey[600], // Establecer el color de letra del texto
+                  fontSize: 22, // Establecer el tamaño de letra del texto
+                  fontWeight: FontWeight.bold, // Establecer el grosor de letra del texto
+                ),
+              ),
 
-              },
-              child: Text('Hacer Pedido'),
+              style: ElevatedButton.styleFrom(
+                primary: Color(0xFFABDB7F),
+                minimumSize: Size(150, 50),
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+
             ),
           ),
+
         ],
       ),
+
     );
   }
 
@@ -122,32 +193,53 @@ class _CompradorItemCardState extends State<CompradorItemCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
-
+      color: Color(0xFFABDB7F), // Establecemos el color del Card
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10), // Establecemos la forma del Card
+        side: BorderSide(
+          color: Color(0xFF007B3E), // Establecemos el color del borde del Card
+          width: 2.0, // Establecemos el ancho del borde del Card
+        ),
+      ),
       child: ListTile(
-        title: Text(widget.compradorItem.name),
-        subtitle: Text('Cantidad disponible: ${widget.compradorItem.quantity}\nPrecio: ${widget.compradorItem.price}'),
+
+        title: Text( widget.compradorItem.name,
+        style: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 22.0,
+        color: Colors.black,),
+        ),
+        subtitle: Text('Cantidad disponible: ${widget.compradorItem.quantity}\nPrecio: ${widget.compradorItem.price}',
+          style: TextStyle(
+            fontSize: 16.0,
+            color: Colors.grey[600],
+          ),
+        ),
         trailing: Row(
+
           mainAxisSize: MainAxisSize.min,
           children: [
            IconButton(
               icon: Icon(Icons.remove),
-              onPressed: () {
+               onPressed: () {
                 setState(() {
                   cantidadSeleccionada = cantidadSeleccionada > 0 ? cantidadSeleccionada - 1 : 0;
                 });
               },
+             color: Colors.black,
             ),
             Text(
               cantidadSeleccionada.toString(),
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 22),
             ),
             IconButton(
               icon: Icon(Icons.add),
               onPressed: () {
-                setState(() {
+                   setState(() {
                   cantidadSeleccionada = cantidadSeleccionada < widget.compradorItem.quantity ? cantidadSeleccionada + 1 : widget.compradorItem.quantity;
                 });
-              },
+              } ,
+              color: Colors.black,
             ),
 
           ],
