@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'My App',
-              home: Compradores(), // pantalla de inicio para valor verdadero
+              home: CompradorScreen(), // pantalla de inicio para valor verdadero
             );
           }else{
             return MaterialApp(

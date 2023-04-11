@@ -78,7 +78,6 @@ class _CompradoresState extends State<Compradores> {
                   },
                   ),
                 ),
-
                   Padding(padding: EdgeInsets.only(top: 10, left: 10,right: 10, bottom: 30),
                   child: TextField(
                   decoration: InputDecoration(
@@ -109,7 +108,6 @@ class _CompradoresState extends State<Compradores> {
                   ),
                     style: TextStyle(
                       color: Colors.black,
-
                     ),
                   onChanged: (value) {
                     setState(() {

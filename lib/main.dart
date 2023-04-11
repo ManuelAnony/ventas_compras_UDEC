@@ -58,7 +58,11 @@ class HomeVendedor extends State<InicioVendedor> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Switch(
+
                     value: switchValue,
+                    activeColor: Colors.green,
+                    inactiveTrackColor: Colors.blue,
+
                     onChanged: (value) async {
                       setState(() {
                         switchValue = value;
