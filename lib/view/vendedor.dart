@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -24,6 +22,7 @@ class _InventarioState extends State<Inventario> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFF007B3E),
         title: Text('Inventario'),
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -60,6 +59,8 @@ class _InventarioState extends State<Inventario> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showAddDialog(),
+        backgroundColor: Color(0xFFABDB7F),
+        foregroundColor: Colors.white,
         child: Icon(Icons.add),
       ),
     );
@@ -105,13 +106,23 @@ class _InventarioState extends State<Inventario> {
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Cancelar'),
+              child: Text('Cancelar',
+                style: TextStyle(
+                  color: Color(0xFFABDB7F),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: Text('Guardar'),
+              child: Text('Guardar',
+                style: TextStyle(
+                  color: Color(0xFFABDB7F),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               onPressed: () async {
                 String name = _nameController.text;
                 int quantity = int.parse(_quantityController.text);
@@ -174,13 +185,23 @@ class _InventarioState extends State<Inventario> {
         ),
         actions: <Widget>[
           TextButton(
-            child: Text('Cancelar'),
+            child: Text('Cancelar',
+              style: TextStyle(
+                color: Color(0xFFABDB7F),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           TextButton(
-            child: Text('Eliminar'),
+            child: Text('Eliminar',
+              style: TextStyle(
+                color: Color(0xFFABDB7F),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             style: TextButton.styleFrom(
               //primary: Colors.red,
             ),
@@ -190,7 +211,12 @@ class _InventarioState extends State<Inventario> {
             },
           ),
           TextButton(
-            child: Text('Guardar'),
+            child: Text('Guardar',
+              style: TextStyle(
+                color: Color(0xFFABDB7F),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             onPressed: () async {
               String name = _nameController.text;
               int quantity = int.parse(_quantityController.text);

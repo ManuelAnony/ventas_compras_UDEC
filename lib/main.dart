@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:compras/view/comprador.dart';
+import 'package:compras/view/pedidos.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
@@ -117,6 +118,10 @@ class HomeVendedor extends State<InicioVendedor> {
                 ElevatedButton(
                   onPressed: () {
                     // Acciones del botón para ir a la base de pedidos
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Pedidos()),
+                    );
                   },
                   child: Text('Ir a Base de Pedidos',
                     style: TextStyle(

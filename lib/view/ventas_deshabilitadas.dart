@@ -5,6 +5,7 @@ class ProductPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
         title: Text('Ventas en pausa',
             style: TextStyle(fontSize: 22),
       ),

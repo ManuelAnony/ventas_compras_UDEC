@@ -1,4 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:compras/DTO/CompradorItem.dart';
+import 'package:compras/DTO/CompradorItemCard.dart';
+import 'package:compras/DTO/Pedido.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class Compradores extends StatefulWidget {
@@ -134,7 +138,57 @@ class _CompradoresState extends State<Compradores> {
           Padding(
             padding: EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 15),
             child: ElevatedButton(
-              onPressed: () {        },
+              onPressed: () async{
+                if (nombreUsuario.isNotEmpty && direccion.isNotEmpty && itemList.isNotEmpty) {
+                  Pedido pedido = Pedido(
+                    nombreComprador: nombreUsuario,
+                    direccionEnvio: direccion,
+                    items: itemList.where((item) => item.quantity > 0).toList(),
+                  );
+
+                  // Inicializar Firebase
+                  await Firebase.initializeApp();
+
+                  // Obtener la referencia a la colección de pedidos en Firebase
+                  final pedidoRef = FirebaseFirestore.instance.collection('pedidos');
+
+                  // Guardar el pedido en Firebase
+                  await pedidoRef.add({
+                    'nombreComprador': pedido.nombreComprador,
+                    'direccionEnvio': pedido.direccionEnvio,
+                    'items': pedido.items.map((item) => {
+                      'nombre': item.name,
+                      'precio': item.price,
+                      'cantidad': item.quantity,
+                    }).toList(),
+                    'fecha': DateTime.now(),
+                  });
+
+                  // Actualizar la cantidad de elementos en Firebase
+                  final itemsRef = FirebaseFirestore.instance.collection('items');
+                  pedido.items.forEach((item) async {
+                    final itemDoc = itemsRef.doc(item.name);
+                    final itemSnapshot = await itemDoc.get();
+                    final itemData = itemSnapshot.data();
+                    final itemQuantity = itemData!['quantity'];
+                    await itemDoc.update({'quantity': itemQuantity - item.quantity});
+                  });
+
+                  // Mostrar una alerta indicando que el pedido fue realizado con éxito
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text('Pedido realizado con éxito'),
+                      actions: [
+                        TextButton(
+                          child: Text('OK'),
+                          onPressed: () => Navigator.pop(context),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              },
               child: Text(
                 'Hacer Pedido',
                 style: TextStyle(
@@ -163,87 +217,6 @@ class _CompradoresState extends State<Compradores> {
   }
 
 }
-class CompradorItem {
-  final String id;
-  final String name;
-  final int quantity;
-  final double price;
 
-  CompradorItem(DocumentSnapshot document)
-      : id = document.id,
-        name = document['name'],
-        quantity = document['quantity'],
-        price = document['price'];
-}
 
-class CompradorItemCard extends StatefulWidget {
-  final CompradorItem compradorItem;
-
-  CompradorItemCard({required this.compradorItem});
-
-  @override
-  _CompradorItemCardState createState() => _CompradorItemCardState();
-}
-
-class _CompradorItemCardState extends State<CompradorItemCard> {
-  int cantidadSeleccionada = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: Color(0xFFABDB7F), // Establecemos el color del Card
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10), // Establecemos la forma del Card
-        side: BorderSide(
-          color: Color(0xFF007B3E), // Establecemos el color del borde del Card
-          width: 2.0, // Establecemos el ancho del borde del Card
-        ),
-      ),
-      child: ListTile(
-
-        title: Text( widget.compradorItem.name,
-        style: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 22.0,
-        color: Colors.black,),
-        ),
-        subtitle: Text('Cantidad disponible: ${widget.compradorItem.quantity}\nPrecio: ${widget.compradorItem.price}',
-          style: TextStyle(
-            fontSize: 16.0,
-            color: Colors.grey[600],
-          ),
-        ),
-        trailing: Row(
-
-          mainAxisSize: MainAxisSize.min,
-          children: [
-           IconButton(
-              icon: Icon(Icons.remove),
-               onPressed: () {
-                setState(() {
-                  cantidadSeleccionada = cantidadSeleccionada > 0 ? cantidadSeleccionada - 1 : 0;
-                });
-              },
-             color: Colors.black,
-            ),
-            Text(
-              cantidadSeleccionada.toString(),
-              style: TextStyle(fontSize: 22),
-            ),
-            IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () {
-                   setState(() {
-                  cantidadSeleccionada = cantidadSeleccionada < widget.compradorItem.quantity ? cantidadSeleccionada + 1 : widget.compradorItem.quantity;
-                });
-              } ,
-              color: Colors.black,
-            ),
-
-          ],
-        ),
-      ),
-    );
-  }
-}
 
