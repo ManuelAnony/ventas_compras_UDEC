@@ -3,12 +3,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class CompradorItem {
   final String id;
   final String name;
-  late final int quantity;
+  late int quantity;
+  late int selecQuantity; // <- agregando "late" aquí
   final double price;
 
   CompradorItem(DocumentSnapshot document)
       : id = document.id,
         name = document['name'],
-        quantity = document['quantity'],
-        price = document['price'];
+
+        price = document['price'] {
+    // inicializar la variable "selecQuantity" después de la creación del objeto
+        this.selecQuantity = document['selecQuantity'];
+        this.quantity = document['quantity'];
+  }
 }

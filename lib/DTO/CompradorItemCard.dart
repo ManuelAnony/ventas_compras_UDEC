@@ -12,6 +12,7 @@ class CompradorItemCard extends StatefulWidget {
 
 class _CompradorItemCardState extends State<CompradorItemCard> {
   int cantidadSeleccionada = 0;
+  List<int> cantidadSeleccionadaArray = [];
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +61,8 @@ class _CompradorItemCardState extends State<CompradorItemCard> {
               onPressed: () {
                 setState(() {
                   cantidadSeleccionada = cantidadSeleccionada < widget.compradorItem.quantity ? cantidadSeleccionada + 1 : widget.compradorItem.quantity;
+                  cantidadSeleccionadaArray.add(cantidadSeleccionada);
+                  print(cantidadSeleccionadaArray);
                 });
               } ,
               color: Colors.black,

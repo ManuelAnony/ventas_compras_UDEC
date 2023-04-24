@@ -5,10 +5,12 @@ class Pedido {
   final String nombreComprador;
   final String direccionEnvio;
   final List<CompradorItem> items;
+  final String valorTotal;
 
   Pedido({
     required this.nombreComprador,
     required this.direccionEnvio,
     required this.items,
+    required this.valorTotal,
   });
 }

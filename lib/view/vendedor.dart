@@ -17,7 +17,7 @@ class Inventario extends StatefulWidget {
 
 class _InventarioState extends State<Inventario> {
   CollectionReference items = FirebaseFirestore.instance.collection('items');
-
+  int cantidaSeleccionada =0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +43,7 @@ class _InventarioState extends State<Inventario> {
               data['name'],
               data['quantity'],
               data['price'],
+              data['selecQuantity'],
             );
           }).toList();
 
@@ -127,11 +128,13 @@ class _InventarioState extends State<Inventario> {
                 String name = _nameController.text;
                 int quantity = int.parse(_quantityController.text);
                 double price = double.parse(_priceController.text);
+                int selecQuantity = cantidaSeleccionada;
 
                 await items.add({
                   'name': name,
                   'quantity': quantity,
                   'price': price,
+                  'selecQuantity':selecQuantity,
                 });
 
                 Navigator.of(context).pop();
@@ -221,11 +224,13 @@ class _InventarioState extends State<Inventario> {
               String name = _nameController.text;
               int quantity = int.parse(_quantityController.text);
               double price = double.parse(_priceController.text);
+              int selecQuantity = cantidaSeleccionada;
 
               await items.doc(item.id).update({
                 'name': name,
                 'quantity': quantity,
                 'price': price,
+                'selecQuantity': selecQuantity,
               });
 
               Navigator.of(context).pop();
@@ -243,8 +248,9 @@ class Item {
   final String name;
   final int quantity;
   final double price;
+  final int selecQuantity;
 
-  Item(this.id, this.name, this.quantity, this.price);
+  Item(this.id, this.name, this.quantity, this.price ,this.selecQuantity);
 }
 
 class ItemCard extends StatelessWidget {

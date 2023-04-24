@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:compras/view/ventas_deshabilitadas.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'DTO/CompradorItem.dart';
 import 'DTO/espera.dart';
 import 'firebase_options.dart';
 import 'view/comprador.dart';
@@ -16,6 +17,9 @@ void main() async{
 class MyApp extends StatelessWidget {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+  final CollectionReference itemsCollection = FirebaseFirestore.instance.collection('items');
+
+  List<CompradorItem> itemList = [];
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<DocumentSnapshot>(
@@ -30,7 +34,7 @@ class MyApp extends StatelessWidget {
             print("Entrada correcta");
             return MaterialApp(
               debugShowCheckedModeBanner: false,
-              title: 'My App',
+              title: 'Compras',
               home: Compradores(), // pantalla de inicio para valor verdadero
             );
           }else{
