@@ -44,8 +44,16 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
+        ndk{
+            abiFilters "armeabi-v7a", "x86", "armeabi", "mips"
+        }
     }
-
+    splits{
+        abi{
+            enable true
+            universalApk true
+        }
+    }
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.

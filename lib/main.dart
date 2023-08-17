@@ -84,9 +84,24 @@ class HomeVendedor extends State<InicioVendedor> {
                 ),
               ],
             ),
-            Expanded(
-              child: Container(),
+            SizedBox(height: 20),
+            Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.only(top: 40.0),
+                child: Image.asset('assets/escudo.png',
+                  width: 154.0,
+                  height: 200.0,
+                ),
             ),
+            SizedBox(height: 20),
+            Container(
+              alignment: Alignment.center,
+              child: Image.asset('assets/cendetec.jpeg',
+                width: 225.0,
+                height: 75.0,
+              ),
+            ),
+            SizedBox(height: 100),
             Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
